@@ -9,7 +9,7 @@ CREATE TABLE department
     id INT
     AUTO_INCREMENT,
   name VARCHAR
-    (30),
+    (30) NOT NULL,
   PRIMARY KEY
     (id)
 );
@@ -19,7 +19,7 @@ CREATE TABLE department
         id INT NOT NULL
         AUTO_INCREMENT,
   title VARCHAR
-        (30),
+        (30) NOT NULL,
   salary DECIMAL
         (9,2),
   department_id INT,
