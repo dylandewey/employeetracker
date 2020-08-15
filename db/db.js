@@ -1,5 +1,5 @@
 //Dependencies
-const mySql = require('mysql');
+const mysql = require('mysql');
 //Hides password
 require('dotenv').config();
 
@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
     user: "root",
 
     // Your password
-    password: process.env.password,
+    password: "",
     database: "employee_tracker_db"
 });
 
