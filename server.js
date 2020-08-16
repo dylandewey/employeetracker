@@ -2,7 +2,6 @@ const connection = require('./db/db.js');
 const inquirer = require('inquirer');
 const mysql = require('mysql');
 
-
 function start() {
     inquirer
         .prompt({
@@ -41,8 +40,12 @@ function start() {
                     addRole();
                     break;
 
-                case "Search for a specific song":
-                    songSearch();
+                case "View Employees":
+                    viewEmployee();
+                    break;
+
+                case "View Roles":
+                    viewRoles();
                     break;
 
                 case "exit":
@@ -50,7 +53,9 @@ function start() {
                     break;
             }
         });
-}
+};
+
+start();
 
 function addEmployee() {
     connection.query("SELECT * FROM role", function (err, res) {
@@ -201,28 +206,20 @@ function addRole() {
     })
 }
 
-function songSearch() {
-    inquirer
-        .prompt({
-            name: "song",
-            type: "input",
-            message: "What song would you like to look for?"
-        })
-        .then(function (answer) {
-            console.log(answer.song);
-            connection.query("SELECT * FROM top5000 WHERE ?", { song: answer.song }, function (err, res) {
-                if (err) throw err;
-                console.log(
-                    "Position: " +
-                    res[0].position +
-                    " || Song: " +
-                    res[0].song +
-                    " || Artist: " +
-                    res[0].artist +
-                    " || Year: " +
-                    res[0].year
-                );
-                runSearch();
-            });
-        });
-}
+function viewEmployee() {
+    let viewEmp = "SELECT * FROM employee";
+    connection.query(viewEmp, function (err, data) {
+        if (err) throw err;
+        console.table(data);
+        start();
+    });
+};
+
+function viewRoles() {
+    let viewRole = "SELECT * FROM role";
+    connection.query(viewRole, function (err, data) {
+        if (err) throw err;
+        console.table(data);
+        start();
+    });
+};
