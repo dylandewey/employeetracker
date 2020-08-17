@@ -1,7 +1,7 @@
 //Dependencies
 const mysql = require('mysql');
 //Hides password
-require('dotenv').config();
+//require('dotenv').config();
 
 const connection = mysql.createConnection({
     host: "localhost",
